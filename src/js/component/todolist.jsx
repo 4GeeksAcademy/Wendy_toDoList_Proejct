@@ -21,12 +21,16 @@ let interval;
 interval= setInterval(()=>{
     if(undoTask)
 {
-    if(counter>0){
+    if(counter!=0){
         setCounter(counter-1);
+        }
+        else{
+        setUndoTask(false);
+        setFailTask('');
         }
     }
     else{
-        
+
     }
 },1000);
 
@@ -50,7 +54,9 @@ interval= setInterval(()=>{
 
     };
 
-    function check_item() {
+    function undo_item() {
+        if(undoTask)
+        setFailTask();
 
     }
 
