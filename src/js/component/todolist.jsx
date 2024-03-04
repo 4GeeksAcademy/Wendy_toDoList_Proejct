@@ -20,10 +20,7 @@ let interval;
 
    
  interval= setInterval(()=> {
-    if(undoTask)
-    {
-
-  
+   
     if(counter>0){
         setCounter(counter-1);
         }
@@ -34,9 +31,8 @@ let interval;
         setUndoTask(false);
       
         }
-    }
  
-},1000);
+},1500);
 
     return () => {
     clearInterval(interval);
@@ -55,6 +51,7 @@ let interval;
         let testArray = [...newTask];
         testArray.push(tempTask);  
         setNewTask(testArray);
+      //  val.target.value;
         setTempTask('');
 
     };
@@ -62,11 +59,13 @@ let interval;
 
     function undoDelete() {
         setUndoButton('btn btn-secondary invisible');
+        clearInterval(interval);
         setCounter(5);
+        setUndoTask(false);
         let testArray = [... newTask];
         testArray.push(failTask);
         setNewTask(testArray);
-      setUndoTask(false);
+     
         
    
 
@@ -74,8 +73,8 @@ let interval;
 
 
     function deleteTask (id) {
-        setUndoTask(true);
-        setUndoButton('btn btn-secondary visible');
+     setUndoTask(true);
+  setUndoButton('btn btn-secondary visible');
  let testArray = [...newTask];
  setFailTask(testArray[id]);
  delete testArray [id];
