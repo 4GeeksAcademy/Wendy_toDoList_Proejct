@@ -51,7 +51,7 @@ let interval;
         let testArray = [...newTask];
         testArray.push(tempTask);  
         setNewTask(testArray);
-      //  val.target.value;
+     
         setTempTask('');
 
     };
@@ -101,7 +101,7 @@ let interval;
                                     <h4 className="mb-3">Awesome Todo List</h4>
 
                                
-                                    <div class="add-items d-flex"> <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?" onChange={(e)=> saveTask(e)}/> 
+                                    <div class="add-items d-flex"> <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?" value={tempTask} onChange={(e)=> saveTask(e)}/> 
                                     <button class="add btn btn-primary font-weight-bold todo-list-add-btn" onClick={() => add_list()}>Add</button> </div>
                      
                                         <div className="form-outline flex-fill">
