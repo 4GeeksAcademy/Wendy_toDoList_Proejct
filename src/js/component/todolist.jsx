@@ -8,9 +8,10 @@ import { useState, useEffect } from "react";
 export function TodoList() {
     const [newTask, setNewTask] = useState(['Print Bills', "Ronald is better than Messi"]);
     const [tempTask, setTempTask] = useState('');
-    const [undoTask, setUndoTask] = useState(0);
+    const [undoTask, setUndoTask] = useState(false);
     const [failTask, setFailTask] = useState('');
     const [counter, setCounter] = useState(5);
+    const [undoButton, setUndoButton] = useState('btn btn-secondary invisible');
 
 
 let interval;
@@ -18,24 +19,29 @@ let interval;
     useEffect(() => {
 
    
-// interval= setInterval(()=>{
-//     if(undoTask)
-// {
-//     if(counter!=0){
-//         setCounter(counter-1);
-//         }
-//         else{
-//         setUndoTask(false);
-//         setFailTask('');
-//         }
-//     }
-//     else{
+ interval= setInterval(()=> {
+    if(undoTask)
+    {
 
+  
+    if(counter>0){
+        setCounter(counter-1);
+        }
+        else{
+        setUndoTask(false);
+        setFailTask('');
+        setUndoButton('btn btn-secondary invisible');
+        }
+    }
+ 
+},1000);
 
-//     }
-// },1000);
+    return () => {
+    clearInterval(interval);
+        }
+    
 
-}, [undoTask]);
+},[undoTask]);
 
 
     function saveTask(val) {
@@ -44,15 +50,24 @@ let interval;
     }
 
     function add_list() {
-        let testArray = [... newTask];
+        let testArray = [...newTask];
         testArray.push(tempTask);
       
         setNewTask(testArray);
         setTempTask('');
 
+    };
 
+
+    function undoDelete() {
+        let testArray = [... newTask];
+        testArray.push(failTask);
+      
+        setNewTask(testArray);
+        setUndoButton('btn btn-secondary invisible');
 
     };
+
 
     function undo_item () {
         if(undoTask)
@@ -61,13 +76,12 @@ let interval;
     }
 
     function deleteTask (id) {
- 
+        setUndoTask(true);
+        setUndoButton('btn btn-secondary visible');
  let testArray = [...newTask];
  setFailTask(testArray[id]);
  delete testArray [id];
  setNewTask(testArray);
-   setUndoTask(true);
- 
 
     }
 
@@ -115,7 +129,7 @@ let interval;
                                             </li>
                                         )}
 
-
+<button type="button" className={undoButton} onClick={()=> undoDelete()}>Undo {counter}</button>
                                     </ul>
 
                                 </div>
@@ -126,7 +140,7 @@ let interval;
                     </div>
                    
                 </div>
-                <button type="button" class="btn btn-secondary">Undo{}</button>
+               
             </section>
 
         </div>
