@@ -28,9 +28,11 @@ let interval;
         setCounter(counter-1);
         }
         else{
-        setUndoTask(false);
+         setUndoButton('btn btn-secondary invisible');
+       
         setFailTask('');
-        setUndoButton('btn btn-secondary invisible');
+        setUndoTask(false);
+      
         }
     }
  
@@ -51,8 +53,7 @@ let interval;
 
     function add_list() {
         let testArray = [...newTask];
-        testArray.push(tempTask);
-      
+        testArray.push(tempTask);  
         setNewTask(testArray);
         setTempTask('');
 
@@ -60,20 +61,17 @@ let interval;
 
 
     function undoDelete() {
+        setUndoButton('btn btn-secondary invisible');
+        setCounter(5);
         let testArray = [... newTask];
         testArray.push(failTask);
-      
         setNewTask(testArray);
-        setUndoButton('btn btn-secondary invisible');
+      setUndoTask(false);
+        
+   
 
     };
 
-
-    function undo_item () {
-        if(undoTask)
-        setFailTask();
-
-    }
 
     function deleteTask (id) {
         setUndoTask(true);
